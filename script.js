@@ -7,10 +7,33 @@ const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-const words = ['application', 'programming', 'computer', 'wisdom', 'interface'];
+const words = ['application', 'programming', 'computer', 'wisdom', 'interface', 'wizard'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetters = [];
+const correctLetters = ['w', 'i', 'z', 'a', 'r', 'd'];
 const wrongLetters = [];
 
+//Show hidden word
+function displayWord() {
+    wordEl.innerHTML = `
+    ${selectedWord
+    .split('')
+    .map(
+        letter => `
+        <span class='letter'>
+        ${correctLetters.includes(letter) ? letter : ''}</span>
+        `
+    )
+    .join('')}
+    `;
+
+    const innerWord = wordEl.innerText.replace(/\n/g, '');
+    
+    if (innerWord === selectedWord) {
+        finalMessage.innerText = 'Congratulations! You Won!';
+        popup.style.display = 'flex';
+    }
+}
+
+displayWord();
